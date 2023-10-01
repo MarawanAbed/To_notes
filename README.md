@@ -19,7 +19,9 @@ using hive help me to store local database like  key and value like firebase
 and the data store in box like collection in firebase 
 note : it store only data primitive like int,string .... .
 cant store object but there is a way 
+
 # app url
+https://drive.google.com/file/d/1RzyVSqQkRhig_CKI-Bk0dL98Ui_gbLC4/view?usp=sharing
 
 # screen shot
 ![5ada3d24-03cc-4d0c-a794-3f8b62a294f5](https://github.com/MarawanAbed/clean-arch-notes-app/assets/73714493/fbb2007b-282d-440a-a698-35a7780aed0f)
