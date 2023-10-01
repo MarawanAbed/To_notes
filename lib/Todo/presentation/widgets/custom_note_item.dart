@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:intl/intl.dart';
-import 'package:notes_app/controller/notes_cubit.dart';
-import 'package:notes_app/models/notes_model.dart';
-import 'package:notes_app/view/screen/edit_notes.dart';
+import 'package:notes_app/Todo/presentation/pages/edit_notes.dart';
+import 'package:notes_app/Todo/presentation/manager/notes_cubit.dart';
+import 'package:notes_app/Todo/domain/entities/notes_entity.dart';
 
 class CustomNoteItems extends StatelessWidget {
   const CustomNoteItems({
@@ -12,7 +12,7 @@ class CustomNoteItems extends StatelessWidget {
     required this.noteModel,
   }) : super(key: key);
 
-  final NoteModel noteModel;
+  final NoteEntity noteModel;
 
   @override
   Widget build(BuildContext context) {
@@ -113,5 +113,3 @@ class CustomNoteItems extends StatelessWidget {
     );
   }
 }
-
-

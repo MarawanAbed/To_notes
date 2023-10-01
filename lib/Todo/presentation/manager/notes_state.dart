@@ -11,8 +11,12 @@ class AddNotesError extends NotesState {}
 
 class DisplayNotesLoading extends NotesState {}
 class DisplayNotesSuccess extends NotesState {
-  final List<NoteModel>notes;
+  final List<NoteEntity>notes;
 
   DisplayNotesSuccess(this.notes);
 }
-class DisplayNotesError extends NotesState {}
+class DisplayNotesError extends NotesState {
+  final String message;
+
+  DisplayNotesError(this.message);
+}

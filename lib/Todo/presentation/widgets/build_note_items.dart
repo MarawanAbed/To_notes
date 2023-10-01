@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes_app/controller/notes_cubit.dart';
-import 'package:notes_app/view/widget/custom_note_item.dart';
+import 'package:notes_app/Todo/presentation/manager/notes_cubit.dart';
+import 'package:notes_app/Todo/presentation/widgets/custom_note_item.dart';
 
 class BuildNoteItems extends StatelessWidget {
   const BuildNoteItems({
@@ -12,7 +12,13 @@ class BuildNoteItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<NotesCubit, NotesState>(
       listener: (context, state) {
-        // TODO: implement listener
+        if (state is DisplayNotesError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Error loading notes: ${state.message}'),
+            ),
+          );
+        }
       },
       builder: (context, state) {
         if (state is DisplayNotesLoading) {
@@ -20,6 +26,12 @@ class BuildNoteItems extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         } else if (state is DisplayNotesSuccess) {
+          if (state.notes.isEmpty) {
+            // Show a message when there are no notes to display.
+            return const Center(
+              child: Text('No notes available.'),
+            );
+          }
           return Expanded(
             child: ListView.separated(
               itemBuilder: (context, index) {
@@ -34,8 +46,6 @@ class BuildNoteItems extends StatelessWidget {
               itemCount: state.notes.length,
             ),
           );
-        } else if (state is DisplayNotesError) {
-          return const Text('Error loading notes');
         } else {
           return const SizedBox(); // Empty container if the state is not recognized
         }

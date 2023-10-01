@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/view/screen/add_notes.dart';
-import 'package:notes_app/view/widget/build_note_items.dart';
-import 'package:notes_app/view/widget/custom_appbar.dart';
-import 'package:notes_app/view/widget/custom_search_field.dart';
+import 'package:notes_app/Todo/presentation/pages/add_notes.dart';
+import 'package:notes_app/Todo/presentation/widgets/build_note_items.dart';
+import 'package:notes_app/Todo/presentation/widgets/custom_appbar.dart';
+import 'package:notes_app/Todo/presentation/widgets/custom_search_field.dart';
 
 class NotesViewScreen extends StatelessWidget {
   const NotesViewScreen({super.key});
@@ -10,13 +10,11 @@ class NotesViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
+      body: const Padding(
+        padding: EdgeInsets.all(20.0),
         child: Column(
-          children: const [
-            SizedBox(
-              height: 20,
-            ),
+          children: [
+            SizedBox(height: 20),
             CustomAppBar(
               icon: Icons.sort,
               text: Text(
@@ -24,13 +22,9 @@ class NotesViewScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 30, color: Colors.white),
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 10),
             CustomSearchField(),
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 10),
             BuildNoteItems(),
           ],
         ),
@@ -49,9 +43,3 @@ class NotesViewScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-

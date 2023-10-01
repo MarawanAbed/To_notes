@@ -1,50 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:notes_app/constant/constant.dart';
-import 'package:notes_app/models/notes_model.dart';
+import 'package:notes_app/Todo/domain/use_cases/add_notes.dart';
+import 'package:notes_app/Todo/domain/use_cases/get_notes.dart';
+import 'package:notes_app/Todo/domain/entities/notes_entity.dart';
 
 part 'notes_state.dart';
 
 class NotesCubit extends Cubit<NotesState> {
-  NotesCubit() : super(NotesInitial());
+  NotesCubit({
+    required this.addNotes,
+    required this.getNotesUse,
+  }) : super(NotesInitial());
 
   static NotesCubit get(context) => BlocProvider.of(context);
+  final GetNotesUseCase getNotesUse;
+  final AddNotesUseCase addNotes;
 
-  var titleController = TextEditingController();
-  var subTitleController = TextEditingController();
   bool hasChanges = false;
-  Color? selectedColor;
   bool isAscending = true; // Sorting order flag
 
-  void selectColor(Color color) {
-    selectedColor = color;
-    emit(ChangeColorNotes());
-  }
+  List<NoteEntity> _notes = []; // Private list
 
-  addNote(NoteModel note) {
+  List<NoteEntity> get notes => List.unmodifiable(_notes); // Expose an immutable list
+
+  void addNote(NoteEntity note) {
     emit(AddNotesLoading());
-    var notesBox = Hive.box<NoteModel>(myBox);
-    notesBox.add(note).then((value) {
+    try {
+      addNotes(note);
+      _updateNotesList(); // Update the internal notes list
       emit(AddNotesSuccess());
-    }).catchError((er) {
-      debugPrint(er.toString());
+    } catch (e) {
+      debugPrint(e.toString());
       emit(AddNotesError());
-    });
+    }
   }
 
-  List<NoteModel> notes = [];
-
-  getNotes() {
+  void getNotes() {
     emit(DisplayNotesLoading());
     try {
-      final notesBox = Hive.box<NoteModel>(myBox);
-      notes = notesBox.values.toList();
-      emit(DisplayNotesSuccess(notes));
+      _notes = getNotesUse();
+      emit(DisplayNotesSuccess(_notes));
     } catch (er) {
       debugPrint(er.toString());
-      emit(DisplayNotesError());
+      emit(DisplayNotesError(er.toString()));
     }
   }
 
@@ -78,11 +77,9 @@ class NotesCubit extends Cubit<NotesState> {
 
   void searchNotes(String query) {
     if (query.isEmpty) {
-      // If the query is empty, show all notes
-      emit(DisplayNotesSuccess(notes));
+      emit(DisplayNotesSuccess(_notes));
     } else {
-      // Filter notes based on the search query
-      final filteredNotes = notes.where((note) {
+      final filteredNotes = _notes.where((note) {
         final titleMatch = note.title!.toLowerCase().contains(query.toLowerCase());
         final subTitleMatch = note.subTitle!.toLowerCase().contains(query.toLowerCase());
         return titleMatch || subTitleMatch;
@@ -93,11 +90,8 @@ class NotesCubit extends Cubit<NotesState> {
   }
 
   void sortNotes() {
-    // Toggle the sorting order
     isAscending = !isAscending;
-
-    // Sort the notes list based on the sorting order
-    notes.sort((a, b) {
+    _notes.sort((a, b) {
       if (isAscending) {
         return a.title!.toLowerCase().compareTo(b.title!.toLowerCase());
       } else {
@@ -105,6 +99,11 @@ class NotesCubit extends Cubit<NotesState> {
       }
     });
 
-    emit(DisplayNotesSuccess(notes));
+    emit(DisplayNotesSuccess(_notes));
+  }
+
+  // Helper method to update the internal notes list after adding or editing a note
+  void _updateNotesList() {
+    _notes = getNotesUse();
   }
 }

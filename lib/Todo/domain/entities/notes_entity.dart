@@ -1,10 +1,9 @@
-//store data cuz i need to be model
 import 'package:hive/hive.dart';
 
-part 'notes_model.g.dart';
+part 'notes_entity.g.dart';
 
 @HiveType(typeId: 0)
-class NoteModel extends HiveObject{
+class NoteEntity extends HiveObject{
   @HiveField(0)
   String? title;
   @HiveField(1)
@@ -14,5 +13,5 @@ class NoteModel extends HiveObject{
   @HiveField(3)
   int? color;
 
-  NoteModel({required this.title,required this.subTitle, required this.date,this.color});
+  NoteEntity({required this.title,required this.subTitle, required this.date,this.color});
 }

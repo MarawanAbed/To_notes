@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/constant/constant.dart';
-import 'package:notes_app/view/widget/build_item_color.dart';
+import 'package:notes_app/utils/constant/constant.dart';
+import 'package:notes_app/Todo/presentation/widgets/build_item_color.dart';
 
 class BuildColorItem extends StatelessWidget {
   const BuildColorItem({
@@ -14,10 +14,8 @@ class BuildColorItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return SizedBox(
-      height: 32 * 2, //2*32
+      height: 32 * 2, // 2*32
       child: ListView.separated(
         itemCount: backgroundColors.length,
         scrollDirection: Axis.horizontal,
