@@ -19,6 +19,7 @@ class CustomAppBar extends StatelessWidget {
       children: [
         text!,
         InkWell(
+          borderRadius: BorderRadius.circular(10),
           onTap: () {
             final cubit = context.read<NotesCubit>();
             cubit.sortNotes();

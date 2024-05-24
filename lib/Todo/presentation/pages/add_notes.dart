@@ -41,11 +41,14 @@ class _AddNewNotesState extends State<AddNewNotes> {
           color: Colors.orange,
           inAsyncCall: state is AddNotesLoading ? true : false,
           child: Scaffold(
+            appBar: PreferredSize(
+              preferredSize: const Size.fromHeight(50),
+              child: CustomArrowBar(),
+            ),
             body: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 40, 16, 0),
+              padding: const EdgeInsets.fromLTRB(16, 30, 16, 0),
               child: Column(
                 children: [
-                  const CustomArrowBar(),
                   Expanded(
                     child: ListView(
                       children: [
@@ -60,14 +63,14 @@ class _AddNewNotesState extends State<AddNewNotes> {
                         const SizedBox(
                           height: 20,
                         ),
-                        myTextField(
+                        CustomTextField(
                           controller: titleController,
                           title: 'Title',
                           color: Colors.grey,
                           size: 30,
                           border: InputBorder.none,
                         ),
-                        myTextField(
+                        CustomTextField(
                           controller: subTitleController,
                           title: 'Type something here',
                           color: Colors.grey,
@@ -91,7 +94,7 @@ class _AddNewNotesState extends State<AddNewNotes> {
                 cubit.addNote(noteModel);
               },
               backgroundColor: Colors.grey.shade800,
-              child: const Icon(Icons.save),
+              child: const Icon(Icons.save,color: Colors.white,),
             ),
           ),
         );

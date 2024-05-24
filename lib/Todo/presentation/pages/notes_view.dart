@@ -12,21 +12,23 @@ class NotesViewScreen extends StatelessWidget {
     return Scaffold(
       body: const Padding(
         padding: EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            SizedBox(height: 20),
-            CustomAppBar(
-              icon: Icons.sort,
-              text: Text(
-                'Notes',
-                style: TextStyle(fontSize: 30, color: Colors.white),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 20),
+              CustomAppBar(
+                icon: Icons.sort,
+                text: Text(
+                  'Notes',
+                  style: TextStyle(fontSize: 30, color: Colors.white),
+                ),
               ),
-            ),
-            SizedBox(height: 10),
-            CustomSearchField(),
-            SizedBox(height: 10),
-            BuildNoteItems(),
-          ],
+              SizedBox(height: 10),
+              CustomSearchField(),
+              SizedBox(height: 20),
+              BuildNoteItems(),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -38,6 +40,7 @@ class NotesViewScreen extends StatelessWidget {
         child: const Icon(
           Icons.add,
           size: 38,
+          color: Colors.white,
         ),
       ),
     );

@@ -29,22 +29,27 @@ class BuildNoteItems extends StatelessWidget {
           if (state.notes.isEmpty) {
             // Show a message when there are no notes to display.
             return const Center(
-              child: Text('No notes available.'),
+              child: Text(
+                'No notes available.',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
             );
           }
-          return Expanded(
-            child: ListView.separated(
-              itemBuilder: (context, index) {
-                var model = state.notes[index];
-                return CustomNoteItems(noteModel: model);
-              },
-              separatorBuilder: (context, index) {
-                return const SizedBox(
-                  height: 10,
-                );
-              },
-              itemCount: state.notes.length,
-            ),
+          return ListView.separated(
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              var model = state.notes[index];
+              return CustomNoteItems(noteModel: model);
+            },
+            separatorBuilder: (context, index) {
+              return const SizedBox(
+                height: 10,
+              );
+            },
+            itemCount: state.notes.length,
           );
         } else {
           return const SizedBox(); // Empty container if the state is not recognized

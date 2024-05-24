@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:intl/intl.dart';
-import 'package:notes_app/Todo/presentation/pages/edit_notes.dart';
-import 'package:notes_app/Todo/presentation/manager/notes_cubit.dart';
 import 'package:notes_app/Todo/domain/entities/notes_entity.dart';
+import 'package:notes_app/Todo/presentation/manager/notes_cubit.dart';
+import 'package:notes_app/Todo/presentation/pages/edit_notes.dart';
 
 class CustomNoteItems extends StatelessWidget {
   const CustomNoteItems({
@@ -33,18 +33,16 @@ class CustomNoteItems extends StatelessWidget {
         ),
         color: Color(noteModel.color!),
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
             children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Text(
                       noteModel.title!,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                         color: Colors.black,
@@ -52,30 +50,15 @@ class CustomNoteItems extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 8),
-                    Text(
-                      noteModel.subTitle!,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
-                        color: Colors.black54,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
+                  ),
                   IconButton(
                     onPressed: () {
                       showPlatformDialog(
                         context: context,
                         builder: (_) => BasicDialogAlert(
                           title: const Text('Delete Note'),
-                          content: const Text('Are you sure you want to delete this note?'),
+                          content: const Text(
+                              'Are you sure you want to delete this note?'),
                           actions: <Widget>[
                             BasicDialogAction(
                               title: const Text('Cancel'),
@@ -95,9 +78,24 @@ class CustomNoteItems extends StatelessWidget {
                         ),
                       );
                     },
-                    icon: const Icon(Icons.delete),
+                    icon: Icon(Icons.delete, color: Colors.grey.shade800),
                   ),
-                  const SizedBox(height: 8),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      noteModel.subTitle!,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.black54,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
                   Text(
                     'Date: ${DateFormat('dd MMMM yyyy').format(DateTime.parse(noteModel.date))}',
                     style: const TextStyle(
@@ -113,3 +111,31 @@ class CustomNoteItems extends StatelessWidget {
     );
   }
 }
+
+//                  Column(
+//                     crossAxisAlignment: CrossAxisAlignment.end,
+//                     children: [
+//                       Row(
+//                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                         children: [
+//                           Text(
+//                             noteModel.subTitle!,
+//                             style:  TextStyle(
+//                               fontSize: 16,
+//                               fontWeight: FontWeight.normal,
+//                               color: Colors.grey.shade800,
+//                             ),
+//                             maxLines: 2,
+//                             overflow: TextOverflow.ellipsis,
+//                           ),
+//                           Text(
+//                             'Date: ${DateFormat('dd MMMM yyyy').format(DateTime.parse(noteModel.date))}',
+//                             style: const TextStyle(
+//                               color: Colors.grey,
+//                             ),
+//                           ),
+//
+//                         ],
+//                       ),
+//                     ],
+//                   ),

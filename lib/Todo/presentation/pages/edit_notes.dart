@@ -32,38 +32,36 @@ class _EditNoteState extends State<EditNote> {
     final cubit = BlocProvider.of<NotesCubit>(context);
 
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(50),
+        child: CustomArrowBar(),
+      ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 40, 16, 0),
-        child: Column(
+        padding: const EdgeInsets.fromLTRB(16, 30, 0, 0),
+        child: ListView(
+          shrinkWrap: true,
           children: [
-            const CustomArrowBar(),
-            Expanded(
-              child: ListView(
-                children: [
-                  BuildColorItem(
-                    selectedColor: selectedColor,
-                    onSelectColor: (color) {
-                      setState(() {
-                        selectedColor = color;
-                      });
-                    },
-                  ),
-                  myTextField(
-                    controller: titleController,
-                    title: widget.noteModel.title ?? '',
-                    color: Colors.grey,
-                    size: 30,
-                    border: InputBorder.none,
-                  ),
-                  myTextField(
-                    controller: subTitleController,
-                    title: widget.noteModel.subTitle ?? '',
-                    color: Colors.grey,
-                    size: 16,
-                    border: InputBorder.none,
-                  ),
-                ],
-              ),
+            BuildColorItem(
+              selectedColor: selectedColor,
+              onSelectColor: (color) {
+                setState(() {
+                  selectedColor = color;
+                });
+              },
+            ),
+            CustomTextField(
+              controller: titleController,
+              color: Colors.grey,
+              title: widget.noteModel.title ?? '',
+              size: 30,
+              border: InputBorder.none,
+            ),
+            CustomTextField(
+              controller: subTitleController,
+              title: widget.noteModel.subTitle ?? '',
+              color: Colors.grey,
+              size: 16,
+              border: InputBorder.none,
             ),
           ],
         ),
@@ -80,14 +78,15 @@ class _EditNoteState extends State<EditNote> {
             if (newSubTitle.isNotEmpty) {
               widget.noteModel.subTitle = newSubTitle;
             }
-            widget.noteModel.color = selectedColor?.value ?? widget.noteModel.color;
+            widget.noteModel.color =
+                selectedColor?.value ?? widget.noteModel.color;
             widget.noteModel.save();
             Navigator.pop(context);
             cubit.getNotes();
           }, context);
         },
         backgroundColor: Colors.grey.shade800,
-        child: const Icon(Icons.check),
+        child: const Icon(Icons.check, color: Colors.white),
       ),
     );
   }
