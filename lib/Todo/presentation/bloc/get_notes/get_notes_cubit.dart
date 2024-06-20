@@ -1,11 +1,12 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 import 'package:notes_app/Todo/domain/entities/notes_entity.dart';
-import 'package:notes_app/Todo/domain/use_cases/get_notes.dart';
 
-part 'get_notes_cubit.freezed.dart';
+import '../../../domain/use_cases/get_notes.dart';
+
 part 'get_notes_state.dart';
+part 'get_notes_cubit.freezed.dart';
 
 class GetNotesCubit extends Cubit<GetNotesState> {
   GetNotesCubit(this._getNotesUse, this.noteBox)
@@ -42,9 +43,9 @@ class GetNotesCubit extends Cubit<GetNotesState> {
     } else {
       final filteredNotes = note.where((note) {
         final titleMatch =
-            note.title!.toLowerCase().contains(query.toLowerCase());
+        note.title!.toLowerCase().contains(query.toLowerCase());
         final subTitleMatch =
-            note.subTitle!.toLowerCase().contains(query.toLowerCase());
+        note.subTitle!.toLowerCase().contains(query.toLowerCase());
         return titleMatch || subTitleMatch;
       }).toList();
       emit(GetNotesState.success(filteredNotes));
@@ -63,5 +64,4 @@ class GetNotesCubit extends Cubit<GetNotesState> {
     });
     emit(GetNotesState.success(note));
   }
-
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes_app/Todo/presentation/bloc/add_notes_cubit.dart';
+import 'package:notes_app/Todo/presentation/bloc/add_notes/add_notes_cubit.dart';
 
 class AddNotesBlocListener extends StatelessWidget {
   const AddNotesBlocListener({super.key});
@@ -13,7 +13,8 @@ class AddNotesBlocListener extends StatelessWidget {
           success: () {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: const Text("Note Added Successfully"),
+                backgroundColor: Colors.green,
+                content: const Text("Note Added Successfully",),
               ),
             );
             Navigator.pop(context);

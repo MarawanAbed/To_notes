@@ -8,5 +8,6 @@ class GetNotesState with _$GetNotesState {
 
   const factory GetNotesState.success(List<NoteEntity> notes) = Success;
 
+
   const factory GetNotesState.error(String message) = Error;
 }

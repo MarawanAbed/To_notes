@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes_app/Todo/presentation/bloc/get_notes_cubit.dart';
+import 'package:notes_app/Todo/presentation/bloc/get_notes/get_notes_cubit.dart';
+import 'package:notes_app/utils/constant/string.dart';
 
 class CustomSearchField extends StatelessWidget {
   const CustomSearchField({Key? key}) : super(key: key);
@@ -10,7 +11,7 @@ class CustomSearchField extends StatelessWidget {
     return TextField(
       onChanged: (value) => context.read<GetNotesCubit>().searchNotes(value),
       decoration: InputDecoration(
-        hintText: "Search notes...",
+        hintText: AppStrings.searchNotes,
         hintStyle: const TextStyle(color: Colors.grey),
         prefixIcon: const Icon(
           Icons.search,

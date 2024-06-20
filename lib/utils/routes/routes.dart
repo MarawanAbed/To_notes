@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes_app/Todo/presentation/bloc/add_notes_cubit.dart';
-import 'package:notes_app/Todo/presentation/bloc/get_notes_cubit.dart';
-import 'package:notes_app/Todo/presentation/bloc/search_notes_cubit.dart';
-import 'package:notes_app/Todo/presentation/bloc/sort_notes_cubit.dart';
+import 'package:notes_app/Todo/presentation/bloc/add_notes/add_notes_cubit.dart';
+import 'package:notes_app/Todo/presentation/bloc/get_notes/get_notes_cubit.dart';
+
 import 'package:notes_app/Todo/presentation/pages/edit_notes/edit_notes.dart';
 import 'package:notes_app/utils/services/services_locator.dart';
 
-import '../Todo/presentation/pages/add_notes/add_notes.dart';
-import '../Todo/presentation/pages/notes_view/notes_view.dart';
+import '../../Todo/presentation/pages/add_notes/add_notes.dart';
+import '../../Todo/presentation/pages/notes_view/notes_view.dart';
 
 class AppRoutes {
   static const String notesView = '/';
@@ -22,12 +21,6 @@ class AppRoutes {
               create: (context) =>
               sl<GetNotesCubit>()
                 ..getNotes(),
-            ),
-            BlocProvider(
-              create: (context) => sl<SortNotesCubit>(),
-            ),
-            BlocProvider(
-              create: (context) => sl<SearchNotesCubit>(),
             ),
           ],
           child: NotesViewScreen(),

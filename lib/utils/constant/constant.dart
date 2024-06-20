@@ -9,4 +9,3 @@ List<Color> backgroundColors = [
   const Color(0xFFC0262A), // pale red
 ];
 
-String myBox='notes';

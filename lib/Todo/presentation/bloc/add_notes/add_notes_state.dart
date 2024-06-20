@@ -6,7 +6,8 @@ class AddNotesState with _$AddNotesState {
 
   const factory AddNotesState.loading() = Loading;
 
+
   const factory AddNotesState.success() = Success;
 
-  const factory AddNotesState.error(String error) = Error;
+  const factory AddNotesState.error(String message) = Error;
 }

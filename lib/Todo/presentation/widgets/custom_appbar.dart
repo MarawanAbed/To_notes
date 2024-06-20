@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes_app/Todo/presentation/bloc/get_notes_cubit.dart';
+import 'package:notes_app/Todo/presentation/bloc/get_notes/get_notes_cubit.dart';
 
 class CustomAppBar extends StatelessWidget {
   final Widget? text;

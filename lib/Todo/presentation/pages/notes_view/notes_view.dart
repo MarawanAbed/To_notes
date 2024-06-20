@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notes_app/Todo/presentation/widgets/build_note_items.dart';
 import 'package:notes_app/Todo/presentation/widgets/custom_appbar.dart';
 import 'package:notes_app/Todo/presentation/widgets/custom_search_field.dart';
-import 'package:notes_app/utils/routes.dart';
+import 'package:notes_app/utils/routes/routes.dart';
 
 class NotesViewScreen extends StatelessWidget {
   const NotesViewScreen({super.key});

@@ -46,6 +46,9 @@ dependencies:
   intl: ^0.18.1
   get_it: ^7.6.4
   watcher: ^1.1.0
+  image_picker: ^1.1.2
+  fluttertoast: ^8.2.6
+
 
 
 

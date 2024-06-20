@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notes_app/Todo/domain/entities/notes_entity.dart';
-import 'package:notes_app/Todo/presentation/bloc/get_notes_cubit.dart';
+import 'package:notes_app/Todo/presentation/bloc/get_notes/get_notes_cubit.dart';
 import 'package:notes_app/Todo/presentation/widgets/custom_note_item.dart';
-import 'package:notes_app/utils/constant/constant.dart';
+import 'package:notes_app/utils/constant/string.dart';
 
 class BuildNoteItems extends StatefulWidget {
   const BuildNoteItems({
@@ -20,7 +20,7 @@ class _BuildNoteItemsState extends State<BuildNoteItems> {
 
   @override
   void initState() {
-    noteBox = Hive.box<NoteEntity>(myBox);
+    noteBox = Hive.box<NoteEntity>(AppStrings.myBox);
     super.initState();
   }
 
@@ -48,7 +48,7 @@ class _BuildNoteItemsState extends State<BuildNoteItems> {
                 return notes.isEmpty
                     ? Center(
                         child: Text(
-                          "No Notes Yet",
+                          AppStrings.noNotesYet,
                           style: TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       )
@@ -79,31 +79,3 @@ class _BuildNoteItemsState extends State<BuildNoteItems> {
     );
   }
 }
-
-//ValueListenableBuilder(
-//       valueListenable: noteBox.listenable(),
-//       builder: (context, Box<NoteEntity> box, _) {
-//         var notes = box.values.toList();
-//         return notes.isEmpty
-//             ? Expanded(
-//                 child: Center(
-//                 child: Text(
-//                   "No Notes Yet",
-//                   style: TextStyle(fontSize: 18, color: Colors.white),
-//                 ),
-//               ))
-//             : ListView.separated(
-//                 shrinkWrap: true,
-//                 itemBuilder: (context, index) {
-//                   var model = notes[index];
-//                   return CustomNoteItems(noteModel: model);
-//                 },
-//                 separatorBuilder: (context, index) {
-//                   return const SizedBox(
-//                     height: 10,
-//                   );
-//                 },
-//                 itemCount: notes.length,
-//               );
-//       },
-//     );
