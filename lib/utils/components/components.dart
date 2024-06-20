@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dialogs/flutter_dialogs.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({super.key, required this.controller, required this.title, required this.color, required this.size, required this.border});
@@ -20,5 +21,33 @@ class CustomTextField extends StatelessWidget {
         hintStyle: TextStyle(color: color, fontSize: size,),
       ),
     );
+  }
+}
+
+Future<void> showConfirmationDialog(Function() onConfirm, context) async {
+  final confirmed = await showPlatformDialog(
+    context: context,
+    builder: (_) => BasicDialogAlert(
+      title: const Text('Edit Note'),
+      content: const Text('Are you sure you want to edit this note?'),
+      actions: <Widget>[
+        BasicDialogAction(
+          title: const Text('Cancel'),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        BasicDialogAction(
+          title: const Text('Edit'),
+          onPressed: () {
+            Navigator.pop(context);
+            onConfirm();
+          },
+        ),
+      ],
+    ),
+  );
+  if (confirmed ?? false) {
+    onConfirm();
   }
 }

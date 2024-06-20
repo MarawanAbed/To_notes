@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes_app/Todo/presentation/manager/notes_cubit.dart';
+import 'package:notes_app/Todo/presentation/bloc/get_notes_cubit.dart';
 
 class CustomSearchField extends StatelessWidget {
   const CustomSearchField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final cubit = BlocProvider.of<NotesCubit>(context);
-
     return TextField(
-      onChanged: (value) => cubit.searchNotes(value),
+      onChanged: (value) => context.read<GetNotesCubit>().searchNotes(value),
       decoration: InputDecoration(
         hintText: "Search notes...",
         hintStyle: const TextStyle(color: Colors.grey),

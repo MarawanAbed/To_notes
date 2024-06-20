@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes_app/Todo/presentation/manager/notes_cubit.dart';
+import 'package:notes_app/Todo/presentation/bloc/get_notes_cubit.dart';
 
 class CustomAppBar extends StatelessWidget {
   final Widget? text;
@@ -21,8 +21,7 @@ class CustomAppBar extends StatelessWidget {
         InkWell(
           borderRadius: BorderRadius.circular(10),
           onTap: () {
-            final cubit = context.read<NotesCubit>();
-            cubit.sortNotes();
+            context.read<GetNotesCubit>().sortNotes();
           },
           child: Container(
             width: 40,

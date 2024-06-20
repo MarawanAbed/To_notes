@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:intl/intl.dart';
 import 'package:notes_app/Todo/domain/entities/notes_entity.dart';
-import 'package:notes_app/Todo/presentation/manager/notes_cubit.dart';
-import 'package:notes_app/Todo/presentation/pages/edit_notes.dart';
+import 'package:notes_app/Todo/presentation/bloc/get_notes_cubit.dart';
+import 'package:notes_app/utils/routes.dart';
 
 class CustomNoteItems extends StatelessWidget {
   const CustomNoteItems({
@@ -18,14 +18,7 @@ class CustomNoteItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => EditNote(
-              noteModel: noteModel,
-            ),
-          ),
-        );
+        Navigator.pushNamed(context, AppRoutes.editNotes, arguments: noteModel);
       },
       child: Card(
         shape: RoundedRectangleBorder(
@@ -70,7 +63,7 @@ class CustomNoteItems extends StatelessWidget {
                               title: const Text('Delete'),
                               onPressed: () {
                                 noteModel.delete();
-                                BlocProvider.of<NotesCubit>(context).getNotes();
+                                context.read<GetNotesCubit>().getNotes();
                                 Navigator.pop(context);
                               },
                             ),

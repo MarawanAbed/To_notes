@@ -6,7 +6,7 @@ part of 'notes_entity.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class NoteModelAdapter extends TypeAdapter<NoteEntity> {
+class NoteEntityAdapter extends TypeAdapter<NoteEntity> {
   @override
   final int typeId = 0;
 
@@ -17,8 +17,8 @@ class NoteModelAdapter extends TypeAdapter<NoteEntity> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return NoteEntity(
-      title: fields[0] as String,
-      subTitle: fields[1] as String,
+      title: fields[0] as String?,
+      subTitle: fields[1] as String?,
       date: fields[2] as String,
       color: fields[3] as int?,
     );
@@ -44,7 +44,7 @@ class NoteModelAdapter extends TypeAdapter<NoteEntity> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is NoteModelAdapter &&
+      other is NoteEntityAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
